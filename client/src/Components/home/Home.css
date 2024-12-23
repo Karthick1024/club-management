@@ -1,0 +1,57 @@
+/* Import animations */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* General Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f3f4f6, #ffffff);
+}
+
+/* Form Card Styling */
+.student-form .register {
+    background-color: #ffffff;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    animation-duration: 1.5s;
+}
+
+.student-form .form-label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.student-form .form-control,
+.student-form .form-select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.student-form .btn {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: none;
+    transition: background 0.3s ease;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.student-form .btn:hover {
+    background: linear-gradient(45deg, #0056b3, #00376d);
+}
+
+/* Heading Animation */
+.text-primary.animate__fadeInDown {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Animation */
+.animate__zoomIn {
+    animation-duration: 1s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .student-form .register {
+        padding: 20px;
+    }
+}
