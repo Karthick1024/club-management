@@ -1,33 +1,61 @@
-import React from 'react';
-import './Home.css';
+import React, { useState } from 'react';
+import './NewRegistration.css';
 
-const Home = () => {
+const NewRegistration = () => {
+    // State for form fields
+    // const [formData, setFormData] = useState({
+    //     studentName: '',
+    //     registerNumber: '',
+    //     dob: '',
+    //     bloodGroup: '',
+    //     department: '',
+    //     address: '',
+    //     clubName: '',
+    // });
+
+    // // Handle input changes
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
+    // };
+
+    // // Handle form submission
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log('Form data:', formData);
+    //     // You can now send formData to the backend via an API call
+    // };
+
     return (
         <div className="container-fluid mt-5 student-form">
             <h1 className="text-center text-primary animate__animated animate__fadeInDown">
                 Students Club Registration
             </h1>
             <div className="register card shadow-lg p-4 animate__animated animate__zoomIn">
-                <form method="post">
+                <form >
                     <div className="mb-3">
-                        <label htmlFor="studentname" className="form-label">
+                        <label htmlFor="studentName" className="form-label">
                             Student Name:
                         </label>
                         <input
                             type="text"
-                            id="studentname"
+                            id="studentName"
+                            name="studentName"
                             className="form-control"
+                            
                             required
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="registernumber" className="form-label">
+                        <label htmlFor="registerNumber" className="form-label">
                             Register Number:
                         </label>
                         <input
                             type="text"
-                            id="registernumber"
+                            id="registerNumber"
+                            name="registerNumber"
                             className="form-control"
+                            
                             required
                         />
                     </div>
@@ -35,25 +63,39 @@ const Home = () => {
                         <label htmlFor="dob" className="form-label">
                             DOB:
                         </label>
-                        <input type="date" id="dob" className="form-control" required />
+                        <input
+                            type="date"
+                            id="dob"
+                            name="dob"
+                            className="form-control"
+                           
+                            required
+                        />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="blood-group" className="form-label">
+                        <label htmlFor="bloodGroup" className="form-label">
                             Blood Group:
                         </label>
-                        <input type="text" id="blood-group" className="form-control" />
+                        <input
+                            type="text"
+                            id="bloodGroup"
+                            name="bloodGroup"
+                            className="form-control"
+                            
+                        />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="department-select" className="form-label">
+                        <label htmlFor="department" className="form-label">
                             Select a Department:
                         </label>
                         <select
-                            id="department-select"
+                            id="department"
                             name="department"
                             className="form-select"
+                       
                             required
                         >
-                            <option value="none" disabled selected>
+                            <option value="" disabled>
                                 Choose a department
                             </option>
                             <option value="tamil">Department of Tamil</option>
@@ -93,22 +135,28 @@ const Home = () => {
                             id="address"
                             className="form-control"
                             rows="3"
+                            
+                            
                         ></textarea>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="club-name" className="form-label">
+                        <label htmlFor="clubName" className="form-label">
                             Club Name:
                         </label>
                         <select
-                            name="club-name"
-                            id="club-name"
+                            name="clubName"
+                            id="clubName"
                             className="form-select"
-                        >    <option value="none" disabled selected>Choose club</option>
+                          
+                        >
+                            <option value="" disabled>
+                                Choose club
+                            </option>
                             <option value="ncc">NCC</option>
                             <option value="nss">NSS</option>
-                            <option value="">PT</option>
-                            <option value="">YRC</option>
-                            <option value="">GENERAL CLUB</option>
+                            <option value="pt">PT</option>
+                            <option value="yrc">YRC</option>
+                            <option value="general-club">GENERAL CLUB</option>
                         </select>
                     </div>
                     <div className="text-center">
@@ -122,4 +170,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default NewRegistration;
