@@ -15,15 +15,11 @@ const App = () => {
 
     useEffect(() => {
         AOS.init({
-            duration: 1000, // Animation duration in ms
-            once: false,    // Allow animations to happen multiple times
+            duration: 1000, 
+            once: false,   
         });
 
-        const interval = setInterval(() => {
-            setAnimationKey(prevKey => prevKey + 1); // Increment key every 10 seconds
-        }, 10000);
-
-        return () => clearInterval(interval); // Cleanup interval on unmount
+       
     }, []);
 
   

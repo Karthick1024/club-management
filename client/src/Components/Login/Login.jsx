@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
-    const [role, setRole] = useState('hod'); // State for role
+    const [role, setRole] = useState('hod'); 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -73,6 +73,7 @@ const Login = () => {
                                 required
                             />
                         </div>
+                        
                         <button type="submit" className="btn btn-primary w-100">
                             Login as {role === 'hod' ? 'HOD' : 'Staff'}
                         </button>

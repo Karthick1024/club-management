@@ -18,6 +18,7 @@ body {
 .appear-left{
     border: 1px solid black;
     width: 60%;
+    height: 500px;
 }
 .appear-left p{
     color: coral;
@@ -26,8 +27,8 @@ body {
 }
 
 .btn-group .btn:hover {
-    background-color: inherit !important; /* No hover background */
-    color: inherit !important; 
-    /* No hover border color */
+    
+    color: white !important; 
+    
 }
 
