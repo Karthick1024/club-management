@@ -3,6 +3,33 @@ import cross_icon from "../../assets/images/cross_icon.png";
 import "./NewRegistration.css";
 
 const NewRegistration = ({ setShowStudentRegistration }) => {
+
+  const formData = {
+    studentName: "John Doe",
+    registerNumber: "123456",
+    dob: "2000-01-15",
+    bloodGroup: "O+",
+    department: "computer-science",
+    address: "123 Main Street, Springfield, IL, USA",
+    clubName: "ncc",
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {
+      studentName: event.target.studentName.value,
+      registerNumber: event.target.registerNumber.value,
+      dob: event.target.dob.value,
+      bloodGroup: event.target.bloodGroup.value,
+      department: event.target.department.value,
+      address: event.target.address.value,
+      clubName: event.target.clubName.value,
+    };
+    console.log(data);
+    
+  };
+  
+
+
   return (
     <div className="student-form ">
       <div className="register w-100 card shadow-lg p-4">
@@ -15,6 +42,7 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
             onClick={() => {
                 
                 setShowStudentRegistration(false);
+                
               }}
           />
         </div>
@@ -78,7 +106,7 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
                   className="form-select"
                   required
                 >
-                  <option value="" disabled>
+                  <option value="choose" disabled>
                     Choose a department
                   </option>
                   <option value="tamil">Department of Tamil</option>
