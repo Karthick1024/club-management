@@ -8,7 +8,8 @@ const Dashboard = ({role}) => {
     
     return (
         <div>
-            {role === 'hod' ? <Hoddashboard/>:  <Staffdashboard/>}
+            {/* {role === 'hod' ? <Hoddashboard/>:  <Staffdashboard/>} */}
+            {role === "hod" ? <Hoddashboard /> : role === "staff" ? <Staffdashboard /> : <div>Unauthorized Role</div>}
             
            
         </div>

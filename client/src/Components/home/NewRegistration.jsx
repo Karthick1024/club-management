@@ -1,37 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import cross_icon from "../../assets/images/cross_icon.png";
 import "./NewRegistration.css";
 
 const NewRegistration = ({ setShowStudentRegistration }) => {
+  const [formData, setFormData] = useState({
+    studentName: "",
+    registerNumber: "",
+    dob: "",
+    bloodGroup: "",
+    department: "",
+    studentAddress: "",
+    clubName: "",
+    dateOfJoin: "",
+  });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const formData = {
-    studentName: "John Doe",
-    registerNumber: "123456",
-    dob: "2000-01-15",
-    bloodGroup: "O+",
-    department: "computer-science",
-    address: "123 Main Street, Springfield, IL, USA",
-    clubName: "ncc",
+  // Handle form data changes
+  const changeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = {
-      studentName: event.target.studentName.value,
-      registerNumber: event.target.registerNumber.value,
-      dob: event.target.dob.value,
-      bloodGroup: event.target.bloodGroup.value,
-      department: event.target.department.value,
-      address: event.target.address.value,
-      clubName: event.target.clubName.value,
-    };
-    console.log(data);
-    
-  };
-  
 
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Form Data Submitted:", formData); 
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5100/api/v1/students/register",
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      // On success, display success message
+      alert("Student Registered successfully")
+      setSuccess(response.data.msg);
+      setError(""); 
+    } catch (err) {
+      // Handle error responses
+      if (err.response) {
+        setError(err.response.data.msg || "Something went wrong.");
+      } else {
+        setError("Unable to connect to the server.");
+      }
+    }
+  };
 
   return (
-    <div className="student-form ">
+    <div className="student-form">
       <div className="register w-100 card shadow-lg p-4">
         <div className="d-flex justify-content-between align-items-center g-5">
           <h3 className="text-center">Students Club Registration</h3>
@@ -39,14 +59,15 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
             src={cross_icon}
             alt="Close"
             style={{ cursor: "pointer", width: "24px" }}
-            onClick={() => {
-                
-                setShowStudentRegistration(false);
-                
-              }}
+            onClick={() => setShowStudentRegistration(false)}
           />
         </div>
-        <form>
+
+        {/* Error and success messages */}
+        {error && <div className="alert alert-danger">{error}</div>}
+        {success && <div className="alert alert-success">{success}</div>}
+
+        <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-6">
               <div className="mb-3">
@@ -58,6 +79,8 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
                   id="studentName"
                   name="studentName"
                   className="form-control"
+                  value={formData.studentName}
+                  onChange={changeHandler}
                   required
                 />
               </div>
@@ -70,6 +93,8 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
                   id="registerNumber"
                   name="registerNumber"
                   className="form-control"
+                  value={formData.registerNumber}
+                  onChange={changeHandler}
                   required
                 />
               </div>
@@ -82,6 +107,8 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
                   id="dob"
                   name="dob"
                   className="form-control"
+                  value={formData.dob}
+                  onChange={changeHandler}
                   required
                 />
               </div>
@@ -94,6 +121,8 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
                   id="bloodGroup"
                   name="bloodGroup"
                   className="form-control"
+                  value={formData.bloodGroup}
+                  onChange={changeHandler}
                 />
               </div>
               <div className="mb-3">
@@ -104,81 +133,87 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
                   id="department"
                   name="department"
                   className="form-select"
+                  value={formData.department}
+                  onChange={changeHandler}
                   required
                 >
-                  <option value="choose" disabled>
+                  <option value="" disabled>
                     Choose a department
                   </option>
                   <option value="tamil">Department of Tamil</option>
                   <option value="english">Department of English</option>
                   <option value="mathematics">Department of Mathematics</option>
-                  <option value="computer-science">
-                    Department of Computer Science
-                  </option>
+                  <option value="computer-science">Department of Computer Science</option>
                   <option value="physics">Department of Physics</option>
                   <option value="electronics">Department of Electronics</option>
                   <option value="chemistry">Department of Chemistry</option>
                   <option value="zoology">Department of Zoology</option>
-                  <option value="botany">Department of Botany</option>
-                  <option value="economics">Department of Economics</option>
-                  <option value="history">Department of History</option>
-                  <option value="commerce">Department of Commerce</option>
-                  <option value="corporate-secretaryship">
-                    Department of Corporate Secretaryship
-                  </option>
-                  <option value="business-management">
-                    Department of Business Management
-                  </option>
-                  <option value="physical-education">
-                    Department of Physical Education
-                  </option>
-                  <option value="library-information-science">
-                    Department of Library and Information Science
-                  </option>
                 </select>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="dateOfJoin" className="form-label">
+                  Date of Join:
+                </label>
+                <input
+                  type="date"
+                  id="dateOfJoin"
+                  name="dateOfJoin"
+                  className="form-control"
+                  value={formData.dateOfJoin}
+                  onChange={changeHandler}
+                  required
+                />
               </div>
             </div>
             <div className="col-md-6">
               <div className="mb-3">
-                <label htmlFor="address" className="form-label">
+                <label htmlFor="studentAddress" className="form-label">
                   Address:
                 </label>
                 <textarea
-                  name="address"
-                  id="address"
+                  name="studentAddress"  
+                  id="studentAddress"  
                   className="form-control"
+                  value={formData.studentAddress}
+                  onChange={changeHandler}
                   rows="3"
+                  required
                 ></textarea>
               </div>
-              <div className="mb-3">
-                <label htmlFor="clubName" className="form-label">
-                  Club Name:
-                </label>
-                <select
-                  name="clubName"
-                  id="clubName"
-                  className="form-select"
-                >
-                  <option value="" disabled>
-                    Choose club
-                  </option>
-                  <option value="ncc">NCC</option>
-                  <option value="nss">NSS</option>
-                  <option value="pt">PT</option>
-                  <option value="yrc">YRC</option>
-                  <option value="general-club">GENERAL CLUB</option>
-                </select>
-              </div>
-              <div className="text-center mt-5">
-                <button type="submit" className="btn btn-primary btn-lg">
-                  Register
-                </button>
-              </div>
+            
+
+            <div className="mb-3">
+              <label htmlFor="clubName" className="form-label">
+                Club Name:
+              </label>
+              <select
+                name="clubName"
+                id="clubName"
+                className="form-select"
+                value={formData.clubName}
+                onChange={changeHandler}
+                required
+              >
+                <option value="" disabled>
+                  Choose club
+                </option>
+                <option value="ncc">NCC</option>
+                <option value="nss">NSS</option>
+                <option value="pt">PT</option>
+                <option value="yrc">YRC</option>
+                <option value="general-club">GENERAL CLUB</option>
+              </select>
+            </div>
+            <div className="text-center mt-5">
+              <button type="submit" className="btn btn-primary btn-lg">
+                Register
+              </button>
             </div>
           </div>
-        </form>
       </div>
-    </div>
+    </form>
+      </div >
+    </div >
   );
 };
 
