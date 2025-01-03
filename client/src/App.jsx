@@ -7,6 +7,7 @@ import Login from './Components/Login/Login'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Navbar from './Components/navbar/Navbar'
 import SearchResult from './Pages/SearchResult'
+import PrivateRoute from './Components/Private/PrivateRoute';
 
 
 
@@ -31,7 +32,15 @@ const App = () => {
             <Navbar/>
             <Routes>
                 <Route path='/' element={<Login/>}/>
-                <Route path="dashboard" element={<Dashboard role={userRole} />} />
+                {/* <Route path="dashboard" element={<Dashboard role={userRole} />} /> */}
+                <Route
+                    path="/dashboard"
+                    element={
+                        <PrivateRoute>
+                            <Dashboard role={userRole}/>
+                        </PrivateRoute>
+                    }
+                />
                 <Route path='/search-results' element={<SearchResult/>}/>
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
