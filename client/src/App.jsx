@@ -6,6 +6,7 @@ import AOS from 'aos';
 import Login from './Components/Login/Login'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Navbar from './Components/navbar/Navbar'
+import SearchResult from './Pages/SearchResult'
 
 
 
@@ -31,7 +32,7 @@ const App = () => {
             <Routes>
                 <Route path='/' element={<Login/>}/>
                 <Route path="dashboard" element={<Dashboard role={userRole} />} />
-                
+                <Route path='/search-results' element={<SearchResult/>}/>
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>

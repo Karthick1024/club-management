@@ -4,12 +4,11 @@ import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
-// Routes
 import cors from "cors"
 import studentRoutes from './routes/student.Routes.js'
 import authRoutes from './routes/auth.Routes.js'
 import userRoutes from './routes/password.Routes.js'
-import errorMiddleware from './middleware/errorHandleware.js'  // Fixed typo here
+import errorMiddleware from './middleware/errorHandleware.js'  
 dotenv.config()
 
 const app = express()
@@ -61,21 +60,21 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
+
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/students',studentRoutes)
 app.use('/api/v1/users', userRoutes)
 
 
-// Fallback for unhandled routes
+
 app.use('*', (req, res) => {
   res.status(404).json({ msg: "Page not found " })
 })
 
-// Error handling middleware
+
 app.use(errorMiddleware)
 
-// Test endpoint
+
 app.get('/api', (req, res) => {
   res.send('Hi, Facebook-like API')
 })
