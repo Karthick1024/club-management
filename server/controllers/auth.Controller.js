@@ -110,7 +110,7 @@ export const Login = async (req, res, next) => {
     const { name, password } = req.body;
 
     if (!name || !password) {
-      throw new UnauthenticatedError("Email and password are required");
+      throw new UnauthenticatedError("Name and password are required");
     }
 
     let user = await User.findOne({ name: name.toLowerCase() });
@@ -154,6 +154,8 @@ export const Login = async (req, res, next) => {
 };
 
 export const Logout = async (req, res, next) => {
+  console.log("requested",req);
+  
   res.cookie("token", "logout", {
     httpOnly: true,
     expires: new Date(Date.now()),
