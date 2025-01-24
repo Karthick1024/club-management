@@ -35,6 +35,16 @@ const NewRegistration = ({ setShowStudentRegistration }) => {
           headers: { "Content-Type": "application/json" },
         }
       );
+      setFormData({
+        studentName: "",
+        registerNumber: "",
+        dob: "",
+        bloodGroup: "",
+        department: "",
+        studentAddress: "",
+        clubName: "",
+        dateOfJoin: "",
+      });
 
       // On success, display success message
       alert("Student Registered successfully")
